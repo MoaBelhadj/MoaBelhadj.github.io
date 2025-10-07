@@ -1,0 +1,24 @@
+.navbars {
+    display: inline-block;
+    background-color: rgb(180, 210, 213);
+    padding: 10x 10px;
+    border-radius: 5px;
+
+}
+
+.navbars:hover {
+    background-color: #f46b2b;
+}
+
+.title {
+    font-style: italic;
+    font-weight: bold;
+    color :black;
+    padding: 80px 20px;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.aboutme {
+    display: grid;
+}
