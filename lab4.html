@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+    <title>Lab4</title>
+    <meta name = 'viewport'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="lab3.css">
+    
+    <script>
+        alert("Welcome to my Store!");
+    </script>
+    <script>
+        
+        function timegreeting(hour){
+            let greeting;
+            
+
+            if (hour < 12) {
+                greeting = "Good Morning!";
+            } else if (hour < 18) {
+                greeting = "Good Afternoon!";
+            } else {
+                greeting = "Good Evening!";
+            }
+            return greeting;
+        }
+
+        let time = new Date();
+        let name = prompt("What is your name?");
+        let Item = prompt('Item in need');
+        let hour = time.getHours();
+        
+        while (true) {
+
+            let Itemquan = prompt("Please Enter the Quantity of items (We Only accept Quantity of 1 through 99):");
+
+
+            if (Itemquan === null) {
+                alert("Canceled!");
+            break;
+            }
+
+            number = parseInt(Itemquan);
+
+            if (!isNaN(number) && number >= 1 && number <= 99) {
+            break;
+            } else {
+                alert("Sorry, We Only Accpect Quantity between 1 and 99.");
+            }
+        }
+        
+
+    </script>
+    
+
+</head>
+
+
+<body>
+    <section class = "header">
+        <h1 class = "title">Welcome to the Store</h1>
+        <h6 class=" subtitle">This is the lab 4 page</h4>
+        <nav class = "navbars">
+            <a class="navbarsint" href="index.html">Lab2 Page</a>
+
+            <a class="navbarsint" href="lab3.html">Lab3 Page</a>
+
+
+            
+        </nav>
+    </section>
+
+    <div id = 'storepage'>
+        <script>
+            let orderdate = new Date();
+            orderdate.setDate(orderdate.getDate() + 7);
+            let deliveryDate = orderdate.toDateString();
+
+            let page = document.getElementById('storepage')
+            page.innerHTML = "<h2>" + timegreeting(hour) + " " + name + "!</h2>" +
+            "<p>Thank you for ordering " + number + " " + Item + "(s) with us!" + "</p>" +
+            "<p>Your estimated delivery date is: <strong>" + deliveryDate + "</strong></p>";
+       
+        </script>    
+
+        
+
+
+
+    </div>
+</body>
