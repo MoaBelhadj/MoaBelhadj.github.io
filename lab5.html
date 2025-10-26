@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<head>
+    <meta name = 'viewport'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <title> Lab5</title>
+
+    <link rel="stylesheet" href="lab3.css">
+
+
+</head>
+
+<body>
+
+    <section id = header>
+
+        
+        <h1 class = "title">Register on this form!</h1>
+        <h5 class = 'subtitle'>This is the lab 5 Page</h2>
+        <br>
+        <nav class = "navbars">
+            <a class="navbarsint" href="index.html">Lab2 Page</a>
+            <a class="navbarsint" href="lab3.html">Lab3 Page</a>
+            <a class="navbarsint" href="lab4.html">Lab4 Page</a>
+        </nav>
+    </section>
+
+    <div class="form">
+        <h2>Form</h2>
+        <form>
+            <div class="firstName">
+                <label for="firstName">First Name</label><br>
+                <input type="text" id="firstName">
+            </div>
+            <div class="lastName">
+                <label for="lastName">Last Name</label><br>
+                <input type="text" id="lastName">
+            </div>
+            <div class="email">
+                <label for="email">Email address</label><br>
+                <input type="email" id="email">
+            </div>
+            <div class="password">
+                <label for="password">Password</label><br>
+                <input type="password" id="password" >
+            </div>
+            <div class="dob">
+                <label for="dob">Date of Birth</label><br>
+                <input type="date" id="dob">
+            </div>
+            <div class="submit" style="margin-top:10px;">
+                <button type="submit" id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <br><br>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const f = document.querySelector('form');
+            const fn = document.getElementById('firstName');
+            const ln = document.getElementById('lastName');
+            const em = document.getElementById('email');
+            const pw = document.getElementById('password');
+            const dob = document.getElementById('dob');
+
+            const rid = 'res';
+
+            const vals = () => ({
+                fn: (fn.value),
+                ln: (ln.value),
+                em: (em.value),
+                pw: (pw.value),
+                dob: (dob.value)
+            });
+
+            const m = s => '*'.repeat((s && s.length) || 0);
+
+            const v = ({ fn, ln, em, pw, dob }) => {
+                const e = [];
+                if (!fn) e.push('First Name is required');
+                if (!ln) e.push('Last Name is required');
+                if (!em) e.push('Email is required');
+                if (!pw) e.push('Password is required');
+                if (!dob) e.push('Date of Birth is required');
+                if (pw && !/[!?]/.test(pw)) e.push('Password must include at least one special character: ! or ?');
+                return e;
+            };
+
+            const b = vls => ({
+                fn: vls.fn,
+                ln: vls.ln,
+                em: vls.em,
+                pw: m(vls.pw),
+                dob: vls.dob
+            });
+
+            const rr = (errs, usr) => {
+                let con = document.getElementById(rid);
+                const created = !con;
+                if (!con) {
+                    con = document.createElement('div');
+                    con.id = rid;
+                    
+                }
+
+                if (errs && errs.length) con.textContent = 'Registration Failed\n' + errs.join('\n');
+                else if (usr) con.textContent = `Registration Successful — Thank you ${usr.fn}!\n\n` +
+                    `First Name: ${usr.fn}\nLast Name: ${usr.ln}\nEmail: ${usr.em}\nPassword: ${usr.pw}\nDate of Birth: ${usr.dob}`;
+                else con.textContent = '';
+
+                if (created) {
+                    const fd = document.querySelector('.form');
+                    if (fd && fd.parentNode) fd.parentNode.insertBefore(con, fd.nextSibling);
+                    else document.body.appendChild(con);
+                }
+            };
+
+            if (!f) return;
+
+            f.addEventListener('submit', e => {
+                e.preventDefault();
+                const vls = vals();
+                const errs = v(vls);
+                if (errs.length) {
+                    window.curuser = null;
+                    rr(errs, null);
+                    return;
+                }
+
+                const usr = b(vls);
+                window.curuser = usr;
+                rr([], usr);
+            });
+        });
+    </script>
+</body>
+</html>
